@@ -1,11 +1,11 @@
-
+<%= render 'shared/navbar' %>
 <div class="columns-container">
   <% ['To Do', 'In Progress', 'Review', 'QA', 'Deployed'].each do |status| %>
     <div class="bug-cards-column">
       <h2 class="column-title"><%= status %></h2>
         <% @bugs.filter { |bug| bug.status == status }.each do |bug| %>
           <div class="card-content">
-            <a href="<%= bug_path(bug) %>">
+<!--            <a href="<%#= bug_path(bug) %>">-->
             <div class="assign-initial"></div>
             <h2 class="card-title"> <%= bug.title %></h2>
             <p class="card-description"><%= bug.description %></p>
@@ -31,10 +31,6 @@
                                  options_for_select([['None', nil]] + User.all.map{ |u| [u.email.split('@').first.capitalize, u.id] }, bug.user_id),
                                  {class: 'form-control', onchange: "$('#assign-bug-form-#{bug.id}').submit();"} %>
 
-                  <%#= f.select :user_id, options_for_select(User.all.map{ |u| [u.email.split('@').first.capitalize, u.id] }, bug.user_id), {include_blank: 'None' }, class: 'form-control', onchange: "$('#assign-bug-form-#{bug.id}').submit();" %>
-                  <%#= select_tag 'bug[user_id]', options_for_select(User.all.map{ |u| [u.email.split('@').first.capitalize, u.id] }, bug.user_id), {class: 'form-control', onchange: "$('#assign-bug-form-#{bug.id}').submit();"} %>
-                    <%#= , options_for_select(User.all.collect { |u| [u.name, u.id] }, bug.user_id), { class: "form-control", onchange: "$('#assign-bug-form-#{bug.id}').submit();" } %>
-
                 </div>
                 <%= f.submit 'Assign Bug', class: 'btn btn-status', style: 'display: none;' %>
               <% end %>
@@ -45,7 +41,7 @@
                 <% end %>
               <% end %>
             </div>
-            </a>
+<!--            </a>-->
           </div>
 
 
@@ -53,14 +49,6 @@
       </div>
   <% end %>
 </div>
-
-
-<div class="card-footer">
-  <%= link_to 'Report New Bug', new_bug_path, class: "btn middle" %>
-  <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn sign-out-btn" %>
-</div>
-
-
 <!--Script for ASSIGNMENT -->
 <script>
     $(document).ready(function() {
@@ -141,10 +129,8 @@
             });
         }
 
-        // Initial update on page load
         updateAssignInitial();
 
-        // Update on change of assignment
         $('select[name="bug[user_id]"]').on('change', function() {
             var $card = $(this).closest('.card-content');
             var assignedUser = $(this).find('option:selected').text();

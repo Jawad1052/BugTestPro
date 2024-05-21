@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <div class="navbar-content">
+    <div class="navbar-right">
+      <%= link_to new_bug_path, class: "icon-link" do %>
+        <i class="fa fa-plus-square" aria-hidden="true"></i>
+      <% end %>
+
+      <div class="dropdown">
+        <i class="fa fa-user dropdown-toggle" aria-hidden="true"></i>
+        <div class="dropdown-menu" id="dropdownMenu">
+          <%= link_to 'Edit Profile', edit_user_registration_path, class: "dropdown-item sign-edit-btn"%>
+          <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item sign-out-btn" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,37 +1,39 @@
+<%= render 'shared/navbar' %>
+<div class="form-container">
+  <h1 class="app-title">Report Bug Form</h1>
 
-<h1 class="app-title">Report Bug Form</h1>
+  <%= form_for @bug, html: { class: "bug-form" } do |form| %>
+    <% if @bug.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@bug.errors.count, "error") %> prohibited this bug from being saved:</h2>
 
-<%= form_for @bug, html: { class: "bug-form" } do |form| %>
-  <% if @bug.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@bug.errors.count, "error") %> prohibited this bug from being saved:</h2>
+        <ul>
+          <% @bug.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-        <% @bug.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description, class: "form-control", rows: 5 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :priority %>
+      <%= form.select :priority, ['Low', 'Medium', 'High'], class: "form-control" %>
+    </div>
+
+    <%= form.hidden_field :user_id, value: current_user.id %>
+
+    <div class="actions">
+      <%= form.submit 'Submit', class: 'btn-primary' %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, class: "form-control" %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, class: "form-control" %>
-  </div>
-
-  <div class="field">
-    <%= form.label :priority %>
-    <%= form.select :priority, ['Low', 'Medium', 'High'], class: "form-control" %>
-  </div>
-
-  <%= form.hidden_field :user_id, value: current_user.id %>
-
-  <div class="actions">
-    <%= form.submit class: "btn btn-primary" %>
-  </div>
-<% end %>
+</div>

@@ -1,4 +1,6 @@
 <!-- app/views/bugs/new.html.erb -->
+<%= render 'shared/navbar' %>
+<div class="form-container">
 <h1 class="app-title">Report Bug Form</h1>
 
 <%= form_for @bug, html: { class: "bug-form" } do |form| %>
@@ -33,3 +35,4 @@
     <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>
+</div>

@@ -3,7 +3,7 @@ class Users::OmniauthCallbacksController < ApplicationController
 
     user = User.from_google(from_google_params)
     if user.present?
-      sign_out_all_scopes
+      sign_out_all_scopes #
       # flash[:notice] = t 'devise.omniauth_callbacks.success', kind: 'Google'
       sign_in_and_redirect user, event: :authentication
     else

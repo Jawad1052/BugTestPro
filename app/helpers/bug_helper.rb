@@ -16,13 +16,13 @@ module BugHelper
   def priority_color(priority)
     case priority.downcase
     when 'low'
-      { color: '#d3f7ba', icon: 'fa-check-circle' } # Light green with check mark icon
+      { color: '#d3f7ba', icon: 'fa-check-circle' }
     when 'medium'
-      { color: '#fff9b8', icon: 'fa-exclamation-circle' } # Light yellow with exclamation icon
+      { color: '#fff9b8', icon: 'fa-exclamation-circle' }
     when 'high'
-      { color: '#ffb8b8', icon: 'fa-times-circle' } # Light red with cross icon
+      { color: '#ffb8b8', icon: 'fa-times-circle' }
     else
-      { color: '#ffffff', icon: 'fa-question-circle' } # Default color with question mark icon
+      { color: '#ffffff', icon: 'fa-question-circle' }
     end
   end
 end

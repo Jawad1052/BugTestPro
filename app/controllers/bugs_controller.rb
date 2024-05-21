@@ -1,10 +1,13 @@
 class BugsController < ApplicationController
   load_and_authorize_resource
-   before_action :authenticate_user!
+  before_action :authenticate_user!
   skip_before_action :verify_authenticity_token
-
   def index
-    @bugs = Bug.all
+    if user_signed_in?
+      @bugs = Bug.all
+    else
+      redirect_to new_user_session_path
+    end
   end
   def new
     @bug = Bug.new
@@ -13,7 +16,7 @@ class BugsController < ApplicationController
     @bug = Bug.new(bug_params)
     @bug.status = "To Do"
     if @bug.save
-      redirect_to @bug, notice: 'Bug was successfully created.'
+      redirect_to bugs_path, notice: 'Bug was successfully created.'
     else
       render :new
     end
@@ -59,30 +62,16 @@ class BugsController < ApplicationController
 
   def assign_bug
       service = BugAssignmentService.new(current_user, params)
-      if service.assign_bug
+      if service.call
         redirect_to bugs_path
       else
-        redirect_to @bug, alert: "You can only assign the bug to yourself."
+        redirect_to bugs_path, alert: "You can only assign the bug to yourself."
       end
-    # @bug = Bug.find(params[:id])
-    # bug_user_id = params[:bug][:user_id].to_i
-    # if current_user.role.name == 'manager'
-    #   @bug.update(user_id: bug_user_id)
-    #   redirect_to bugs_path
-    # elsif current_user.id == bug_user_id
-    #   @bug.update(user_id: current_user.id)
-    #   redirect_to bugs_path
-    # else
-    #   redirect_to @bug, alert: "You can only assign bug to yourself."
-    # end
   end
 
   private
 
   def bug_params
-    params.require(:bug).permit(:title, :description, :priority, :status)
-  end
-  def bug_params_update
     params.require(:bug).permit(:title, :description, :priority, :status, :user_id)
   end
 end

@@ -1,6 +1,8 @@
-<!-- app/views/layouts/_flash.html.erb -->
-<% flash.each do |type, message| %>
-  <div class="flash <%= type %>">
-    <p><%= message %></p>
-  </div>
-<% end %>
+<div id="flash-messages">
+  <% flash.each do |type, message| %>
+    <div class="flash <%= type %>">
+      <p><%= message %></p>
+      <button class="close" onclick="this.parentElement.style.display='none';">&times;</button>
+    </div>
+  <% end %>
+</div>

@@ -8,7 +8,7 @@ class BugAssignmentService
     @params = params
   end
 
-  def assign_bug
+  def call
     @bug = Bug.find(params[:id])
     bug_user_id = params[:bug][:user_id].to_i
 

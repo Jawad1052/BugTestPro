@@ -1,29 +1,17 @@
-<<<<<<< HEAD
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# BugTestPro
 
-Things you may want to cover:
+Your go-to solution for efficient bug tracking and project management. Offering JIRA-like functionalities, BugTestPro simplifies task management, bug tracking and ensuring seamless software development workflows. Stay organized, resolve issues promptly, and deliver exceptional results with BugTestPro."
 
-* Ruby version
+# Features
+User Authentication: Sign up, log in, log out, and account management.
+Bug Managment: Create, edit, and delete events.
+Bug Tracking : Status of Bug (Development,QA,Deployment) 
+Assignment: Bugs can be assigned to user depending upon role.
 
-* System dependencies
+* Ruby version 3.1.0
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# sample-code
-=======
-# BugTrackerApp
->>>>>>> origin/main
+* Gems
+---Devise
+---CanCanCan
+---ActiveAdmin
